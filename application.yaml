@@ -1,7 +1,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: sops-test
+  name: sops-kms-test
   namespace: argocd
   annotations:
     # resolves to the 'guestbook' directory
@@ -15,9 +15,9 @@ spec:
     helm:
       valueFiles:
         - values.yaml
-        - secrets://sops-secrets-values.yaml
+        - secrets://sops-secret-values.yaml
   destination:
-    namespace: sops-test
+    namespace: sops-kms-test
     server: https://kubernetes.default.svc
   syncPolicy:
     automated:
