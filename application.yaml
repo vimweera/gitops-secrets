@@ -10,7 +10,7 @@ spec:
   project: default
   source:
     path: main
-    repoURL: git@github.com:ruwanvm/argocd-secrets-poc.git
+    repoURL: https://github.com/vimweera/gitops-secrets.git
     targetRevision: HEAD
     helm:
       valueFiles:
