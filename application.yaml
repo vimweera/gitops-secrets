@@ -1,0 +1,27 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: sops-test
+  namespace: argocd
+  annotations:
+    # resolves to the 'guestbook' directory
+    argocd.argoproj.io/manifest-generate-paths: .
+spec:
+  project: default
+  source:
+    path: main
+    repoURL: git@github.com:ruwanvm/argocd-secrets-poc.git
+    targetRevision: HEAD
+    helm:
+      valueFiles:
+        - values.yaml
+        - secrets://sops-secrets-values.yaml
+  destination:
+    namespace: sops-test
+    server: https://kubernetes.default.svc
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
